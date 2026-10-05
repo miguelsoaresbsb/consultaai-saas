@@ -6,12 +6,12 @@ export default async function Dashboard() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
-  const { data: profile } = await supabase.from("profiles").select("full_name").eq("id", user.id).single();
+  const { data: profile } = await supabase.from("profiles").select("full_name,role,access_status").eq("id", user.id).single();
   const { data: history } = await supabase.from("consultations").select("id,type,query_masked,status,created_at").order("created_at",{ascending:false}).limit(10);
   return <main className="dash">
     <nav className="nav" style={{margin:"-35px -24px 30px"}}><div className="brand">Consulta<span>AI</span></div><div>{user.email}</div></nav>
     <div className="dashgrid">
-      <aside className="side"><Link className="active" href="/dashboard">Visão geral</Link><Link href="/dashboard/consultar">Nova consulta</Link><Link href="/dashboard/historico">Histórico</Link></aside>
+      <aside className="side"><Link className="active" href="/dashboard">Visão geral</Link><Link href="/dashboard/consultar">Nova consulta</Link><Link href="/dashboard/historico">Histórico</Link>{profile?.role==="admin"&&<Link href="/admin">Administração</Link>}</aside>
       <section>
         <h1>Olá, {profile?.full_name || "usuário"}.</h1>
         <p className="muted">Seu espaço privado de consultas.</p>
