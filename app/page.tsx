@@ -39,5 +39,5 @@ export default function Home() {
   </div>;
 }
 function Feature({icon,title,text}:{icon:React.ReactNode,title:string,text:string}) {
-  return <div className="card"><div style={{color:"#42e8a4"}}>{icon}</div><h3>{title}</h3><h3>{title}</h3><p className="muted">{text}</p></div>
+  return <div className="card"><div style={{color:"#42e8a4"}}>{icon}</div><h3>{title}</h3><p className="muted">{text}</p></div>
 }
