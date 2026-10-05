@@ -1,0 +1,1 @@
+export default function Admin(){return <main className="dash"><h1>Solicitações de acesso</h1><p className="muted">Painel de autorização.</p></main>} 
